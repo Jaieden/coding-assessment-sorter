@@ -20,7 +20,7 @@ namespace name_sorter
                 fullnames = GetPeopleFullnames(people);
                 foreach (string fullname in fullnames)
                 {
-                    Console.Write(fullname);
+                    Console.WriteLine(fullname);
                 }
                 FileWriter(fullnames);
             }
