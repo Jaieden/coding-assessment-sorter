@@ -36,7 +36,7 @@ namespace name_sorter.Tests
             Person e = new Person("David Arthur");
             Person f = new Person("Alfred Barry Charles Dent");
             Assert.IsTrue(a.CompareTo(a) == 0); //test self
-            Assert.IsTrue(a.CompareTo(f) == 0); //test same name, different person, max length
+            Assert.IsTrue(a.CompareTo(f) == 0); //test same name, different person, max length.
             Assert.IsTrue(a.CompareTo(c) > 0); //test a before c
             Assert.IsTrue(c.CompareTo(a) < 0); //test a before c in reverse (testing symmetry)
             Assert.IsTrue(d.CompareTo(e) > 0); //test min length
