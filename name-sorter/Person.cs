@@ -9,7 +9,7 @@ namespace name_sorter
     {
 
         //Array to store persons names {"First","Middle","Other","Last"} in a scalable way
-        //By changing the length of names array, the code can support any number of names (minimum two).
+        //By changing the length of names array, the code can support any number of names (minimum two)
         public string[] names = { "", "", "", "" };
 
         public Person(string fullName)
