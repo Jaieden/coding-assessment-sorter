@@ -22,7 +22,7 @@ namespace name_sorter
                 {
                     Console.Write(fullname);
                 }
-                //FileWriter(fullnames);
+                FileWriter(fullnames);
             }
             catch (IndexOutOfRangeException e)
             {
