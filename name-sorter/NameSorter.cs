@@ -14,16 +14,14 @@ namespace name_sorter
         {
             try
             {
-                string[] fullnames = FileReader(args[1]);
-                Person[] people = CreatePeople(fullnames);
-                IComparer<Person> personSorter = GetPersonSorter(args[0]);
-                Array.Sort(people,personSorter);
-                fullnames = GetPeopleFullnames(people);
+                NameSorterProgram fullnameSorter = new NameSorterProgram(args[1]);
+                fullnameSorter.Sort(args[0]);
+                string[] fullnames = fullnameSorter.GetPeopleFullnames();
                 foreach (string fullname in fullnames)
                 {
                     Console.WriteLine(fullname);
                 }
-                FileWriter(fullnames);
+                fullnameSorter.FileWriter(outputFilename);
             }
             catch (IndexOutOfRangeException e)
             {
@@ -34,68 +32,6 @@ namespace name_sorter
                 Console.WriteLine($"Something went wrong {e}");
             }
         }
-
-        static IComparer<Person> GetPersonSorter(string flag)
-        {
-            if (flag == "-a")
-            {
-                return new AscendingPersonSorter();
-            }else if (flag == "-d")
-            {
-                return new DescendingPersonSorter();
-            }
-            else
-            {
-                throw new ArgumentException("Input must be -a or -d");
-            }
-        }
-
-
-        static string[] FileReader(string path)
-        {
-            try
-            {
-                return File.ReadAllLines(path);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"File not found or invalid input: {path} {e}");
-                return new string[0];
-            }
-        }
-
-        static Person[] CreatePeople(string[] fullnames)
-        {
-            Person[] people = new Person[fullnames.Length];
-            for (int i = 0; i < fullnames.Length; i++)
-            {
-                people[i] = new Person(fullnames[i]);
-            }
-            return people;
-        }
-
-        static string[] GetPeopleFullnames(Person[] people)
-        {
-            string[] fullnames = new string[people.Length];
-            for (int i = 0; i < people.Length; i++)
-            {
-                fullnames[i] = people[i].ToString();
-            }
-            return fullnames;
-        }
-
-        static void FileWriter(string[] fullnames)
-        {
-            try
-            {
-                File.WriteAllLines(outputFilename, fullnames);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"Could not write names to file: {outputFilename} {e}");
-            }
-        }
-
     }
 
 

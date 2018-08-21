@@ -2,7 +2,7 @@
   "profiles": {
     "name-sorter": {
       "commandName": "Project",
-      "commandLineArgs": "-d unsorted-names-list.txt"
+      "commandLineArgs": "-d ./unsorted-names-list.txt"
     }
   }
 }
