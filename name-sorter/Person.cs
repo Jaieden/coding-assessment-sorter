@@ -5,12 +5,12 @@ using System.Linq;
 
 namespace name_sorter
 {
-    public class Person : IComparable<Person>
+    public class Person
     {
 
         //Array to store persons names {"First","Middle","Other","Last"} in a scalable way
         //By changing the length of names array, the code can support any number of names (minimum two)
-        public string[] names = { "", "", "", "" };
+        private string[] names = { "", "", "", "" };
 
         public Person(string fullName)
         {
@@ -33,24 +33,12 @@ namespace name_sorter
             return String.Join(" ", test);
         }
 
-        public int CompareTo(Person other)
+        public string[] Names
         {
-            //Compares the surname
-            int comparisonResult = names[names.Length - 1].CompareTo(other.names[other.names.Length - 1]);
-            //If surname is the same, loop through given names, returning the result if they are different
-            if (comparisonResult == 0)
+            get
             {
-                for (int i = 0; i < names.Length - 1; i++)
-                {
-                    comparisonResult = names[i].CompareTo(other.names[i]);
-                    if (comparisonResult != 0)
-                    {
-                        return comparisonResult;
-                    }
-                }
+                return names;
             }
-            //If surname is different returns value. Also will return zero if all names are equal
-            return comparisonResult;
         }
     }
 }

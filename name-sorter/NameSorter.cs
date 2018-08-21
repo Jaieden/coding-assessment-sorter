@@ -14,9 +14,10 @@ namespace name_sorter
         {
             try
             {
-                string[] fullnames = FileReader(args[0]);
+                string[] fullnames = FileReader(args[1]);
                 Person[] people = CreatePeople(fullnames);
-                Array.Sort(people);
+                IComparer<Person> personSorter = GetPersonSorter(args[0]);
+                Array.Sort(people,personSorter);
                 fullnames = GetPeopleFullnames(people);
                 foreach (string fullname in fullnames)
                 {
@@ -31,6 +32,21 @@ namespace name_sorter
             catch (Exception e)
             {
                 Console.WriteLine($"Something went wrong {e}");
+            }
+        }
+
+        static IComparer<Person> GetPersonSorter(string flag)
+        {
+            if (flag == "-a")
+            {
+                return new AscendingPersonSorter();
+            }else if (flag == "-d")
+            {
+                return new DescendingPersonSorter();
+            }
+            else
+            {
+                throw new ArgumentException("Input must be -a or -d");
             }
         }
 
